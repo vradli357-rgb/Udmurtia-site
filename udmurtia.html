@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Удмуртия — край родников, лесов и музыки</title>
+  <meta name="description" content="Короткий сайт-путеводитель по Удмуртии: что посмотреть, куда съездить, что попробовать, факты и маршруты." />
+  <style>
+    :root{
+      --bg: #0b1020;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.09);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --accent: #7cdbff;
+      --accent2:#b6ff6a;
+      --line: rgba(255,255,255,.12);
+      --shadow: 0 18px 45px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1120px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 15% 10%, rgba(124,219,255,.18), transparent 55%),
+        radial-gradient(900px 520px at 85% 20%, rgba(182,255,106,.12), transparent 60%),
+        radial-gradient(900px 620px at 70% 85%, rgba(255,126,210,.12), transparent 58%),
+        linear-gradient(180deg, #070a14 0%, var(--bg) 40%, #070a14 100%);
+      overflow-x:hidden;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(180deg, rgba(7,10,20,.78), rgba(7,10,20,.28));
+      border-bottom:1px solid var(--line);
+    }
+    .topbar .inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 24px;
+      display:flex; align-items:center; gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+      min-width: 240px;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:14px;
+      background:
+        radial-gradient(16px 16px at 30% 35%, rgba(255,255,255,.95), rgba(255,255,255,.1) 60%, transparent 70%),
+        linear-gradient(135deg, rgba(124,219,255,.85), rgba(182,255,106,.75));
+      box-shadow: 0 10px 30px rgba(124,219,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+    }
+    .brand strong{font-weight:750; letter-spacing:.2px}
+    .brand span{display:block; font-size:12px; color:var(--muted); margin-top:2px}
+    nav{display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:flex-end; width:100%}
+    .chip{
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      text-decoration:none;
+      color:var(--muted);
+      background: rgba(255,255,255,.04);
+      transition: .2s ease;
+      font-size:14px;
+      line-height:1;
+      white-space:nowrap;
+    }
+    .chip:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.22); color:var(--text); background: rgba(255,255,255,.07)}
+    .chip.active{color:var(--text); border-color: rgba(124,219,255,.45); box-shadow: 0 0 0 4px rgba(124,219,255,.08)}
+    .hero{
+      padding:38px 0 10px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .hero{grid-template-columns:1fr}
+      .brand{min-width:auto}
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .heroMain{
+      padding:26px 26px 20px;
+      position:relative;
+    }
+    .heroMain:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(600px 240px at 20% 10%, rgba(124,219,255,.16), transparent 60%),
+        radial-gradient(520px 280px at 85% 30%, rgba(182,255,106,.12), transparent 62%);
+      pointer-events:none;
+    }
+    .heroMain > *{position:relative}
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(28px, 3.1vw, 46px);
+      letter-spacing:-.6px;
+      line-height:1.05;
+    }
+    .lead{
+      margin:0 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+      max-width: 62ch;
+    }
+    .ctaRow{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+    .btn{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      padding:11px 14px;
+      border-radius: 14px;
+      text-decoration:none;
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      transition:.2s ease;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.22)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(124,219,255,.22), rgba(182,255,106,.16));
+      border-color: rgba(124,219,255,.35);
+      box-shadow: 0 0 0 4px rgba(124,219,255,.08);
+    }
+    .kpiGrid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:12px;
+      padding:18px;
+    }
+    .kpi{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      border-radius: var(--radius);
+      padding:14px 14px 12px;
+    }
+    .kpi b{display:block; font-size:18px; letter-spacing:-.2px}
+    .kpi small{display:block; color:var(--muted); margin-top:4px; line-height:1.3}
+    .badgeRow{
+      display:flex; flex-wrap:wrap; gap:8px;
+      margin-top:14px;
+    }
+    .badge{
+      font-family: var(--mono);
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      color: rgba(255,255,255,.78);
+      background: rgba(255,255,255,.04);
+    }
+
+    section{padding:18px 0}
+    .sectionHead{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:14px;
+      margin: 8px 0 12px;
+    }
+    .sectionHead h2{margin:0; font-size:22px; letter-spacing:-.2px}
+    .sectionHead p{margin:0; color:var(--muted); max-width:68ch}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:12px;
+    }
+    @media (max-width: 980px){ .grid{grid-template-columns: repeat(2, minmax(0,1fr));} }
+    @media (max-width: 640px){ .grid{grid-template-columns: 1fr;} }
+
+    .mini{
+      padding:16px;
+      border-radius: var(--radius2);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      transition:.2s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .mini:hover{transform: translateY(-1px); background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.2)}
+    .mini h3{margin:0 0 8px; font-size:16px}
+    .mini p{margin:0; color:var(--muted); line-height:1.5; font-size:14px}
+    .tagline{
+      margin-top:10px;
+      display:flex; gap:8px; flex-wrap:wrap;
+    }
+    .tag{
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.8);
+    }
+
+    .twoCol{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 920px){ .twoCol{grid-template-columns:1fr} }
+
+    details{
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.04);
+      padding: 14px 16px;
+    }
+    details + details{margin-top:10px}
+    summary{
+      cursor:pointer;
+      list-style:none;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      font-weight:650;
+    }
+    summary::-webkit-details-marker{display:none}
+    .hint{color:var(--muted); font-weight:500; font-size:13px}
+    .detailsBody{margin-top:10px; color:var(--muted); line-height:1.55; font-size:14px}
+    .route{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;
+    }
+    .pill{
+      border:1px dashed rgba(255,255,255,.18);
+      padding:8px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: rgba(255,255,255,.82);
+      background: rgba(255,255,255,.03);
+    }
+
+    .footer{
+      margin-top:22px;
+      padding: 22px 0 30px;
+      border-top:1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      line-height:1.6;
+    }
+
+    .toast{
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      max-width: min(520px, calc(100vw - 32px));
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(10,14,28,.82);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      display:none;
+      z-index: 50;
+    }
+    .toast b{display:block; margin-bottom:4px}
+    .toast small{color:var(--muted)}
+    .toast .row{display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .toast button{
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 8px 10px;
+      cursor:pointer;
+    }
+    .toast button:hover{background: rgba(255,255,255,.1)}
+    .kbd{
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.85);
+    }
+
+    .sr{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
+  </style>
+</head>
+<body>
+  <header class="topbar" aria-label="Верхняя панель навигации">
+    <div class="inner">
+      <a class="brand" href="#top" aria-label="На главную">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <strong>Удмуртия</strong>
+          <span>мини-путеводитель: природа • культура • маршруты</span>
+        </div>
+      </a>
+      <nav aria-label="Навигация">
+        <a class="chip" href="#about">О регионе</a>
+        <a class="chip" href="#places">Что посмотреть</a>
+        <a class="chip" href="#food">Что попробовать</a>
+        <a class="chip" href="#routes">Маршруты</a>
+        <a class="chip" href="#facts">Факты</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="wrap">
+    <section class="hero" aria-label="Главный экран">
+      <div class="card heroMain">
+        <h1>Удмуртия — край лесов, родников и <span style="color:var(--accent)">музыкального характера</span>.</h1>
+        <p class="lead">
+          Здесь рядом живут тишина хвойных массивов, энергия Ижевска, ремёсла и песенные традиции.
+          Этот сайт — короткая подборка идей, куда поехать, что увидеть и как почувствовать регион.
+        </p>
+        <div class="ctaRow">
+          <a class="btn primary" href="#places" aria-label="Перейти к разделу что посмотреть">▶ Начать с главного</a>
+          <button class="btn" id="btnRandom" type="button" aria-label="Сгенерировать идею поездки">🎲 Идея на сегодня</button>
+          <button class="btn" id="btnCopy" type="button" aria-label="Скопировать ссылку на страницу">🔗 Скопировать ссылку</button>
+        </div>
+
+        <div class="badgeRow" aria-label="Быстрые подсказки">
+          <span class="badge">#Ижевск</span>
+          <span class="badge">#Кама</span>
+          <span class="badge">#родники</span>
+          <span class="badge">#удмуртская_культура</span>
+        </div>
+      </div>
+
+      <aside class="card" aria-label="Короткие тезисы">
+        <div class="kpiGrid">
+          <div class="kpi">
+            <b>Природа</b>
+            <small>леса, реки, озёра и тихие тропы для пеших прогулок.</small>
+          </div>
+          <div class="kpi">
+            <b>Город</b>
+            <small>Ижевск — музейные истории, набережные и современная сцена.</small>
+          </div>
+          <div class="kpi">
+            <b>Культура</b>
+            <small>народные праздники, язык, орнаменты и ремесло.</small>
+          </div>
+          <div class="kpi">
+            <b>Вкус</b>
+            <small>перепечи, табани, местные молочные продукты и выпечка.</small>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="about" aria-label="О регионе">
+      <div class="sectionHead">
+        <h2>О регионе</h2>
+        <p>Удмуртия — это баланс: городская динамика и «перезагрузка» на природе. Ниже — основные направления для знакомства.</p>
+      </div>
+
+      <div class="grid" role="list">
+        <article class="mini" role="listitem">
+          <h3>Ижевск</h3>
+          <p>Столица региона: набережные, музеи, индустриальная история и концерты по выходным.</p>
+          <div class="tagline"><span class="tag">город</span><span class="tag">музеи</span><span class="tag">прогулки</span></div>
+        </article>
+
+        <article class="mini" role="listitem">
+          <h3>Малые города и сёла</h3>
+          <p>Уютные точки на карте, где легче поймать настоящую «местную жизнь» и ремесло.</p>
+          <div class="tagline"><span class="tag">локальная кухня</span><span class="tag">истории</span><span class="tag">ремесло</span></div>
+        </article>
+
+        <article class="mini" role="listitem">
+          <h3>Природные маршруты</h3>
+          <p>Лесные тропы, реки и берега: пикник, фотоохота, спокойные прогулки.</p>
+          <div class="tagline"><span class="tag">лес</span><span class="tag">вода</span><span class="tag">выходные</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="places" aria-label="Что посмотреть">
+      <div class="sectionHead">
+        <h2>Что посмотреть</h2>
+        <p>Список идей (можно расширять): выбери настроение — городской день, культурная точка или природа.</p>
+      </div>
+
+      <div class="grid" role="list">
+        <article class="mini" role="listitem">
+          <h3>Набережные и прогулочные зоны Ижевска</h3>
+          <p>Лучше всего — на закате: вода, свет, кофе и длинный маршрут пешком.</p>
+          <div class="tagline"><span class="tag">вечер</span><span class="tag">фото</span><span class="tag">прогулка</span></div>
+        </article>
+
+        <article class="mini" role="listitem">
+          <h3>Музейный день</h3>
+          <p>Выдели полдня на экспозиции про историю региона, оружейную промышленность и локальную культуру.</p>
+          <div class="tagline"><span class="tag">внутри</span><span class="tag">познавательно</span><span class="tag">семья</span></div>
+        </article>
+
+        <article class="mini" role="listitem">
+          <h3>Этно-впечатления</h3>
+          <p>Орнаменты, песни, традиции: ищи фестивали и мастер-классы (вышивка, декоративные вещи).</p>
+          <div class="tagline"><span class="tag">традиции</span><span class="tag">мастер-класс</span><span class="tag">сувениры</span></div>
+        </article>
+
+        <article class="mini" role="listitem">
+          <h3>Лесные тропы и родники</h3>
+          <p>Идеально для «тихого дня»: термос, удобная обувь и маршрут на 2–4 часа.</p>
+          <div class="tagline"><span class="tag">природа</span><span class="tag">релакс</span><span class="tag">выходные</span></div>
+        </article>
+
+        <article class="mini" role="listitem">
+          <h3>Берега и пляжные точки (летом)</h3>
+          <p>Выбирай безопасные места для купания и пикника; утром меньше людей.</p>
+          <div class="tagline"><span class="tag">лето</span><span class="tag">вода</span><span class="tag">пикник</span></div>
+        </article>
+
+        <article class="mini" role="listitem">
+          <h3>Локальные кафе и пекарни</h3>
+          <p>Хороший способ быстро «попасть в регион» — через выпечку, молочку и домашнюю кухню.</p>
+          <div class="tagline"><span class="tag">еда</span><span class="tag">уют</span><span class="tag">дегустация</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="food" aria-label="Что попробовать">
+      <div class="sectionHead">
+        <h2>Что попробовать</h2>
+        <p>Небольшой гастро-лист: классика, которую легко найти в регионе.</p>
+      </div>
+
+      <div class="twoCol">
+        <div class="card" style="padding:18px">
+          <details open>
+            <summary>
+              Перепечи <span class="hint">выпечка</span>
+            </summary>
+            <div class="detailsBody">
+              Небольшие открытые пирожки с начинками. Часто встречаются варианты с мясом, картофелем, творогом и сезонными добавками.
+              <div class="route">
+                <span class="pill">подходят «на ходу»</span>
+                <span class="pill">хороши с чаем</span>
+                <span class="pill">можно взять ассорти</span>
+              </div>
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              Табани <span class="hint">традиционные лепёшки</span>
+            </summary>
+            <div class="detailsBody">
+              Тёплые лепёшки/блины — отлично заходят с соусами и домашними добавками (мёд, сметана, варенье).
+              <div class="route">
+                <span class="pill">завтрак</span>
+                <span class="pill">семейная подача</span>
+              </div>
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              Местные молочные продукты <span class="hint">простое, но сильное</span>
+            </summary>
+            <div class="detailsBody">
+              Часто именно «простая» часть кухни запоминается: молоко, кефир, творожные вещи, йогурты — попробуй разные бренды.
+              <div class="route">
+                <span class="pill">в дорогу</span>
+                <span class="pill">для перекуса</span>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <div class="card" style="padding:18px">
+          <details open>
+            <summary>
+              Сезонные ягоды и грибы <span class="hint">если сезон</span>
+            </summary>
+            <div class="detailsBody">
+              Лесные сезоны — это отдельный «вкус региона». На рынках и ярмарках можно взять свежие или заготовки.
+              <div class="route">
+                <span class="pill">ярмарки</span>
+                <span class="pill">варенье</span>
+                <span class="pill">сушёные грибы</span>
+              </div>
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              Выпечка и чайные наборы <span class="hint">сувенир</span>
+            </summary>
+            <div class="detailsBody">
+              Возьми с собой набор: выпечка + чай/травы. Хороший «подарок из поездки», который легко довезти.
+              <div class="route">
+                <span class="pill">подарок</span>
+                <span class="pill">долго хранится</span>
+              </div>
+            </div>
+          </details>
+
+          <details>
+            <summary>
+              Локальные сладости <span class="hint">к чаю</span>
+            </summary>
+            <div class="detailsBody">
+              Ищи небольшие кондитерские и ремесленные лавки: часто там есть «не как везде».
+              <div class="route">
+                <span class="pill">десерт</span>
+                <span class="pill">кафе</span>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="routes" aria-label="Маршруты">
+      <div class="sectionHead">
+        <h2>Маршруты на 1–2 дня</h2>
+        <p>Шаблоны маршрутов, которые можно подстроить под сезон и транспорт.</p>
+      </div>
+
+      <div class="grid" role="list">
+        <article class="mini" role="listitem">
+          <h3>1 день: «Ижевск пешком»</h3>
+          <p>Утро: кофе + центр. День: музей. Вечер: набережная + ужин. Закат — обязательный пункт.</p>
+          <div class="tagline"><span class="tag">город</span><span class="tag">в один день</span></div>
+        </article>
+
+        <article class="mini" role="listitem">
+          <h3>1 день: «тихий лес»</h3>
+          <p>Утро: выезд. Днём: тропа 6–12 км. Пикник. Возврат до темноты.</p>
+          <div class="tagline"><span class="tag">природа</span><span class="tag">перезагрузка</span></div>
+        </article>
+
+        <article class="mini" role="listitem">
+          <h3>2 дня: «город + вкус»</h3>
+          <p>День 1: прогулки и музей. День 2: рынок/ярмарка, перепечи, сувениры, кафе-маршрут.</p>
+          <div class="tagline"><span class="tag">еда</span><span class="tag">двухдневка</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="facts" aria-label="Факты">
+      <div class="sectionHead">
+        <h2>Быстрые факты</h2>
+        <p>Небольшие «якоря», чтобы запомнить регион. (Если хочешь — добавлю точные цифры/даты и ссылки на источники.)</p>
+      </div>
+
+      <div class="card" style="padding:18px">
+        <ul style="margin:0; padding-left:18px; color:var(--muted); line-height:1.7">
+          <li><span style="color:var(--text)">Столица:</span> Ижевск.</li>
+          <li><span style="color:var(--text)">Сильные стороны:</span> лесные ландшафты, водные маршруты, ремесло и кухня.</li>
+          <li><span style="color:var(--text)">Лучший формат поездки:</span> 1–2 дня на «первое знакомство», 3–5 дней — чтобы спокойно увидеть больше.</li>
+          <li><span style="color:var(--text)">Сувениры:</span> ремесленные вещи, орнаменты, гастро-наборы к чаю.</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="footer" aria-label="Подвал">
+      <div class="card" style="padding:16px 18px; background: rgba(255,255,255,.03)">
+        <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between">
+          <div>
+            <div style="color:rgba(255,255,255,.88); font-weight:650">Хочешь сделать сайт «живее»?</div>
+            <div>Скажи: <span class="kbd">добавь карту</span>, <span class="kbd">галерею</span>, <span class="kbd">страницы</span>, <span class="kbd">логотип</span> — и я допилю.</div>
+          </div>
+          <button class="btn" id="btnToTop" type="button">⬆ Наверх</button>
+        </div>
+      </div>
+      <div style="margin-top:10px">
+        Сделано как шаблон. Можно свободно менять тексты, добавлять фото и разделы.
+      </div>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <div class="row">
+      <div>
+        <b id="toastTitle">Готово</b>
+        <small id="toastText">Сообщение</small>
+      </div>
+      <button type="button" id="toastClose" aria-label="Закрыть уведомление">Закрыть</button>
+    </div>
+  </div>
+
+  <script>
+    // Мелкий UX: активный пункт меню при прокрутке + тосты + генератор идей.
+    const chips = Array.from(document.querySelectorAll("nav .chip"));
+    const sections = chips.map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+
+    const toast = document.getElementById("toast");
+    const toastTitle = document.getElementById("toastTitle");
+    const toastText = document.getElementById("toastText");
+    const toastClose = document.getElementById("toastClose");
+
+    function showToast(title, text){
+      toastTitle.textContent = title;
+      toastText.textContent = text;
+      toast.style.display = "block";
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => toast.style.display = "none", 3600);
+    }
+    toastClose.addEventListener("click", () => toast.style.display = "none");
+
+    // Scrollspy
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const id = "#" + e.target.id;
+        chips.forEach(c => c.classList.toggle("active", c.getAttribute("href") === id));
+      });
+    }, { rootMargin: "-55% 0px -40% 0px", threshold: 0.01 });
+
+    sections.forEach(s => io.observe(s));
+
+    // Random idea
+    const ideas = [
+      "Сделай день «Ижевск пешком»: музей → кофе → набережная на закате.",
+      "Поезжай на природу: лесная тропа 6–10 км + пикник у воды.",
+      "Гастро-маршрут: перепечи + табани + местные сладости к чаю.",
+      "Культурный день: ремесленная лавка/мастер-класс + вечерний концерт.",
+      "Фото-прогулка: утро в городе, вечер у воды — ловим свет."
+    ];
+    document.getElementById("btnRandom").addEventListener("click", () => {
+      const pick = ideas[Math.floor(Math.random() * ideas.length)];
+      showToast("Идея поездки", pick);
+    });
+
+    // Copy link
+    document.getElementById("btnCopy").addEventListener("click", async () => {
+      try{
+        await navigator.clipboard.writeText(location.href);
+        showToast("Ссылка скопирована", "Можно отправить друзьям или сохранить себе.");
+      }catch(e){
+        showToast("Не получилось", "Браузер не дал доступ к буферу обмена. Скопируй из адресной строки.");
+      }
+    });
+
+    // To top
+    document.getElementById("btnToTop").addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Smooth anchor scrolling
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest('a[href^="#"]');
+      if(!a) return;
+      const target = document.querySelector(a.getAttribute("href"));
+      if(!target) return;
+      e.preventDefault();
+      target.scrollIntoView({behavior:"smooth", block:"start"});
+      history.replaceState(null, "", a.getAttribute("href"));
+    });
+  </script>
+</body>
+</html>
